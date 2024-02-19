@@ -5,6 +5,7 @@ import PlanBookings from './components/PlanBookings';
 import AppBookings from './components/AppBookings';
 import Prepaid from './components/Prepaid';
 import WeekBonus from './components/WeekBonus';
+import TwoBookings from './components/TwoBookings';
 
 import './index.css';
 
@@ -15,6 +16,7 @@ function App() {
   const [inputValue, setInputValue] = React.useState(0);
   const [prepaidValue, setprepaidValue] = React.useState(0);
   const [weekBonus, setweekBonus] = React.useState(0);
+  const [twoBookingsValue, setTwoBookingsValue] = React.useState(0);
 
   const totalPoints = () => {
     const bookingPoints = silverCount * 4000 + goldCount * 6000 + platinumCount * 8500;
@@ -28,8 +30,9 @@ function App() {
         : 0;
     const prepaidPoints = prepaidValue * 500;
     const weekBonusPoints = weekBonus * 2500;
-
-    return bookingPoints + appBookingPoints + prepaidPoints + weekBonusPoints;
+    const totalPoints = bookingPoints + appBookingPoints + prepaidPoints + weekBonusPoints;
+    
+    return totalPoints - (twoBookingsValue * 500);
   };
 
   return (
@@ -91,6 +94,7 @@ function App() {
         <AppBookings inputValue={inputValue} setInputValue={setInputValue} />
         <Prepaid prepaidValue={prepaidValue} setprepaidValue={setprepaidValue} />
         <WeekBonus weekBonus={weekBonus} setweekBonus={setweekBonus} />
+        <TwoBookings twoBookingsValue={twoBookingsValue} setTwoBookingsValue={setTwoBookingsValue} />
       </div>
       <div style={styles.pointsContainer}>
       <h2 style={styles.pointsHeader}>Points Summary</h2>
